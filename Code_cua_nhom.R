@@ -138,10 +138,64 @@ CPU_Filtered$Recommended_Customer_Price = CPU_Filtered2$Recommended_Customer_Pri
 CPU_Filtered$nb_of_Threads = CPU_Filtered2$nb_of_Threads
 CPU_Filtered$Max_nb_of_Memory_Channels = CPU_Filtered2$Max_nb_of_Memory_Channels
 
-#plotTest(CPU_Filtered, CPU_Filtered, columnToFill)
-#anova(price.lm)
+
+#------------------------------------------Bài 1-2 : LÍ THUYẾT KIỂM ĐỊNH------------------------------------------------------------------------------------#
+# Perform Shapiro-Wilk test for normality on Recommended_Customer_Price column
+shapiro_test_result <- shapiro.test(CPU_Filtered$Recommended_Customer_Price)
+
+# Print the test result
+print(shapiro_test_result)
+
+# Perform one-sample t-test
+t_test_result <- t.test(CPU_Filtered$Recommended_Customer_Price, mu = 278.95, alternative = "less")
+
+# Print the test result
+print(t_test_result)
+
+# Split the dataset into two samples: Desktop and Mobile
+desktop_sample <- CPU_Filtered %>% filter(Vertical_Segment == "Desktop")
+mobile_sample <- CPU_Filtered %>% filter(Vertical_Segment == "Mobile")
+
+# Count the number of rows in desktop_sample
+num_rows_desktop <- nrow(desktop_sample)
+
+# Print the result
+print(num_rows_desktop)
+
+# Count the number of rows in desktop_sample
+num_rows_mobile <- nrow(mobile_sample)
+
+# Print the result
+print(num_rows_mobile)
+
+# Perform Shapiro-Wilk test for normality on Recommended_Customer_Price for Desktop sample
+shapiro_desktop <- shapiro.test(desktop_sample$Recommended_Customer_Price)
+print("Shapiro-Wilk test for Desktop sample:")
+print(shapiro_desktop)
+
+# Perform Shapiro-Wilk test for normality on Recommended_Customer_Price for Mobile sample
+shapiro_mobile <- shapiro.test(mobile_sample$Recommended_Customer_Price)
+print("Shapiro-Wilk test for Mobile sample:")
+print(shapiro_mobile)
+
+# Compare the variances of two samples using var.test()
+var_test_result <- var.test(desktop_sample$Recommended_Customer_Price, mobile_sample$Recommended_Customer_Price)
+print("Variance Test:")
+print(var_test_result)
+
+# Perform t-test to compare means of two samples
+t_test_result <- t.test(desktop_sample$Recommended_Customer_Price, mobile_sample$Recommended_Customer_Price)
+print("T-test:")
+print(t_test_result)
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#------------------------------------------Bài 3 : KIỂM ĐỊNH ANOVA 1 YẾU TỐ------------------------------------------------------------------------------------#
 
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+#------------------------------------------Bài 4 : HỒI QUY TUYẾN TÍNH BỘI ------------------------------------------------------------------------------------#
 
 #kiểm tra độ phụ thuộc mỗi biến
 pairs(CPU_Filtered$Recommended_Customer_Price ~ CPU_Filtered$nb_of_Cores + CPU_Filtered$nb_of_Threads + CPU_Filtered$Max_nb_of_Memory_Channels  + CPU_Filtered$Lithography + CPU_Filtered$Launch_Date)
@@ -164,3 +218,4 @@ predict(price.lm , newdata = data.frame(
   Launch_Date = mean(Model$Launch_Date)),
   interval = "confidence"
 )
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------#
