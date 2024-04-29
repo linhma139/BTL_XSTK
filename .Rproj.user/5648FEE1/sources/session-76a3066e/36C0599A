@@ -1,0 +1,28 @@
+{
+    "id": "36C0599A",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1713542417441.0,
+    "source_on_save": false,
+    "relative_order": 8,
+    "properties": {
+        "id": "0e9c9926551a45c1acfe6431e66530d3",
+        "name": "price.lm",
+        "title": "price.lm",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 2478510836879076408,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1713542417441,
+    "read_only": false,
+    "read_only_alternatives": []
+}
